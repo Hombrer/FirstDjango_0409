@@ -26,8 +26,25 @@ def about(request):
     Отчество: <b>{author['Отчество']}</b><br>
     Фамилия: <b>{author['Фамилия']}</b><br>
     телефон: <b>{author['телефон']}</b><br>
-    email: <b>{author['email']}</b><br>
+    email: <b>{author['email']}</b><br><br>
+
+    <a href="/"> Back to Home </a> 
     """
+    # Выше пример гиперссылки
     return HttpResponse(result)
 
 
+# url /item/1
+# url /item/2
+def get_item(request):
+    pass
+
+
+# <ol>
+#   <li> ... </li>
+#   <li> ... </li>
+#   <li> ... </li>
+#   <li> ... </li>
+# </ol>
+def items_list(request):
+    pass
