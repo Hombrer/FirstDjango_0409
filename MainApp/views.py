@@ -24,11 +24,15 @@ items = [
 
 
 def home(request):
-    text = """ <h1>"Изучаем django"</h1><br>
-            <strong>Автор</strong>: <i>Шиховцов В.В.</i>
-           """
-    return HttpResponse(text)
-
+    # text = """ <h1>"Изучаем django"</h1><br>
+    #         <strong>Автор</strong>: <i>Шиховцов В.В.</i>
+    #        """
+    # return HttpResponse(text)
+    context = {
+        "name": "Петров Иван Николаевич",
+        "email": "my_mail@mail.com"
+    }
+    return render(request, "index.html", context)
 
 def about(request):
     result = f"""
