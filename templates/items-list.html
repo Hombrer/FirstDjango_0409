@@ -3,6 +3,18 @@
 <head>
     <meta charset="UTF-8">  
     <title>Items list</title>
+
+    <style type='text/css'>
+        .brd{
+        display: inline;
+        width: 100px; /* Ширина слоя */
+        margin: 0; /* Значение отступов */
+        margin-bottom: 10%; /* Нижний отступ */
+        padding: 10px; /* Поля вокруг текста */
+        border: 4px solid black; /* Параметры границы */
+        background: #fc0; /* Цвет фона */
+        }
+    </style> 
 </head>
 <body>
 
@@ -11,11 +23,12 @@
     </header>
 
     <h2>Список товаров</h2>
-    <ol>
+
         {% for item in items %}
-            <li><a href='/item/{{ item.id }}'>{{ item.name }}</a></li>
+           <div class='brd'><a href='/item/{{ item.id }}'>{{ item.name }}</a></div>
         {% endfor %}
-    </ol>
+
+
 
 </body>
 </html>

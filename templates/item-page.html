@@ -2,14 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">  
-    <title>Item page</title>
-    <style type='text/css'>
-        .brd{
-
-        }
-    </style>    
-
-    
+    <title>Item page</title>  
 </head>
 <body>
     <header>
@@ -17,7 +10,7 @@
     </header>
     <h1>{{ item.name }}</h1>
 
-    <div class='brd'>
+    <div>
         Количество: {{ item.count | default:"Товар отсутствует на складе" }}
     </div>
 
