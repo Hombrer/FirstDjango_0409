@@ -3,15 +3,6 @@ from django.http import HttpResponse, HttpResponseNotFound
 
 
 # Create your views here.
-author = {
-    "Имя": "Иван",
-    "Отчество": "Петрович",
-    "Фамилия": "Иванов",
-    "телефон": "8-923-600-01-02",
-    "email": "vasya@mail.ru"
-
-}
-# readme.md
 
 items = [
    {"id": 1, "name": "Кроссовки abibas" ,"quantity": 5},
@@ -24,18 +15,25 @@ items = [
 
 
 def home(request):
-    # text = """ <h1>"Изучаем django"</h1><br>
-    #         <strong>Автор</strong>: <i>Шиховцов В.В.</i>
-    #        """
-    # return HttpResponse(text)
     context = {
         "name": "Петров Иван Николаевич",
         "email": "my_mail@mail.com"
     }
     return render(request, "index.html", context)
 
+
 def about(request):
+    author = {
+    "Имя": "Иван",
+    "Отчество": "Петрович",
+    "Фамилия": "Иванов",
+    "телефон": "8-923-600-01-02",
+    "email": "vasya@mail.ru"
+    }
     result = f"""
+    <header>
+        / <a href='/'>Home</a> / <a href='/items'>Items</a> / <a href='/about'>About</a> /
+    </header><br><br>
     Имя: <b>{author['Имя']}</b><br>
     Отчество: <b>{author['Отчество']}</b><br>
     Фамилия: <b>{author['Фамилия']}</b><br>
@@ -44,35 +42,21 @@ def about(request):
 
     <a href="/"> Back to Home </a> 
     """
-    # Выше пример гиперссылки
     return HttpResponse(result)
 
 
-# url /item/1
-# url /item/2
 def get_item(request, item_id):
     for item in items:
         if item["id"] == item_id:
-            response = f"""
-            <h2>Название: {item['name']}</h2>
-            <p>Количество: {item['quantity']}</p>
-            <p><a href='/items'> Назад к списку товаров </a></p>
-            """
-            return HttpResponse(response) 
+            context = {
+                "item": item
+            }
+            return render(request, "item-page.html", context)
     return HttpResponseNotFound(f"Товар c id={item_id} не найден")
 
 
-# <ol>
-#   <li> ... </li>
-#   <li> ... </li>
-#   <li> ... </li>
-#   <li> ... </li>
-# </ol>
 def items_list(request):
-    response = "<h1>Список товаров:</h1>"
-    response += "<ol>"
-    for item in items:
-        response += f"<li><a href='/item/{item['id']}'>{item['name']}</a></li>"
-    response += "</ol>"
-
-    return HttpResponse(response)
+    context = {
+        "items": items
+    }
+    return render(request, "items-list.html", context)
