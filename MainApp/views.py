@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotFound
 
 
 # Create your views here.
@@ -11,6 +11,16 @@ author = {
     "email": "vasya@mail.ru"
 
 }
+# readme.md
+
+items = [
+   {"id": 1, "name": "Кроссовки abibas" ,"quantity": 5},
+   {"id": 2, "name": "Куртка кожаная" ,"quantity": 2},
+   {"id": 5, "name": "Coca-cola 1 литр" ,"quantity": 12},
+   {"id": 7, "name": "Картофель фри" ,"quantity": 0},
+   {"id": 8, "name": "Кепка" ,"quantity": 124}
+]
+
 
 
 def home(request):
@@ -36,8 +46,16 @@ def about(request):
 
 # url /item/1
 # url /item/2
-def get_item(request):
-    pass
+def get_item(request, item_id):
+    for item in items:
+        if item["id"] == item_id:
+            response = f"""
+            <h2>Название: {item['name']}</h2>
+            <p>Количество: {item['quantity']}</p>
+            <p><a href='/items'> Назад к списку товаров </a></p>
+            """
+            return HttpResponse(response) 
+    return HttpResponseNotFound(f"Товар c id={item_id} не найден")
 
 
 # <ol>
@@ -47,4 +65,10 @@ def get_item(request):
 #   <li> ... </li>
 # </ol>
 def items_list(request):
-    pass
+    response = "<h1>Список товаров:</h1>"
+    response += "<ol>"
+    for item in items:
+        response += f"<li><a href='/item/{item['id']}'>{item['name']}</a></li>"
+    response += "</ol>"
+
+    return HttpResponse(response)
