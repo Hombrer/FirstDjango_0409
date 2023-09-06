@@ -1,38 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">  
-    <title>Items list</title>
+{% extends 'base.html' %}
 
-    <style type='text/css'>
-          
-        .brd{
-        display: inline-block;
-        width: 150px; /* Ширина слоя */
-        margin: 0; /* Значение отступов */
-        padding: 10px; /* Поля вокруг текста */
-        border: 4px solid black; /* Параметры границы */
-        background: #fc0; /* Цвет фона */
-        word-break: break-all;
-        }
-    </style> 
-</head>
-<body>
+{% load static %}
 
-    <header>
-        / <a href='/'>Home</a> / <a href='/items'>Items</a> / <a href='/about'>About</a> /
-    </header>
+{% block style %}
+    {{ block.super }}
+
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+{% endblock %}
+
+{% block content %}
 
     <h2>Список товаров</h2>
 
-        {% for item in items %}
-           <div class="brd"><p><a href='/item/{{ item.id }}'>{{ item.name }}</a></p>
-         <p>{{ item.description}} </p>
-        </div>
-        {% endfor %}
-
-
-
-
-</body>
-</html>
+    {% for item in items %}
+    <div class='brd'>
+        <p><a href={% url 'item_page' item.id %}>{{ item.name }}</a></p>
+        <p>{{ item.description }} </p>       
+    </div> 
+    {% endfor %}
+{% endblock %}
+    
