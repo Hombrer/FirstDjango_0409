@@ -5,14 +5,15 @@
     <title>Items list</title>
 
     <style type='text/css'>
+          
         .brd{
-        display: inline;
-        width: 100px; /* Ширина слоя */
+        display: inline-block;
+        width: 150px; /* Ширина слоя */
         margin: 0; /* Значение отступов */
-        margin-bottom: 10%; /* Нижний отступ */
         padding: 10px; /* Поля вокруг текста */
         border: 4px solid black; /* Параметры границы */
         background: #fc0; /* Цвет фона */
+        word-break: break-all;
         }
     </style> 
 </head>
@@ -25,8 +26,11 @@
     <h2>Список товаров</h2>
 
         {% for item in items %}
-           <div class='brd'><a href='/item/{{ item.id }}'>{{ item.name }}</a></div>
+           <div class="brd"><p><a href='/item/{{ item.id }}'>{{ item.name }}</a></p>
+         <p>{{ item.description}} </p>
+        </div>
         {% endfor %}
+
 
 
 
